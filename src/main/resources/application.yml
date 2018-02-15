@@ -1,0 +1,48 @@
+server:
+  port: 9090
+
+cash:
+  display-name: @project.name@
+  title: @project.description@
+
+info:
+  name: ${cash.display-name}
+  description: @project.description@
+  version: @project.version@
+
+endpoints:
+  beans:
+    enabled: true
+    sensitive: false
+    id: ${cash.display-name}
+
+logging:
+  level:
+    org:
+      springframework:
+        web: INFO
+    com:
+      cash: DEBUG
+
+register:
+  title: ${cash.title}
+  moduleName: Register
+  moduleDescription: debt and credit management
+  typeRegister:
+    - Debit
+    - Credit
+  categoryRegister:
+    - Water
+    - Light
+    - Phone
+    - Internet
+    - CreditCard
+    - Food
+    - Health
+    - Education
+    - BankRate
+    - Habitation
+  statusRegister:
+    - Paid
+    - Pending
+    - Delayed
