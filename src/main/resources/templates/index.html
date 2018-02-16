@@ -241,6 +241,11 @@
                 <!-- /Cards -->
 
                 <!-- Table -->
+                <div class="alert alert-success alert-dismissible" role="alert" th:if="${message != null}">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <span id="idMessage" th:text="${message}"></span>
+                </div>
+
                 <div class="table-responsive" th:if="${registers != null}">
                     <table class="table table-hover table-condensed">
                         <thead>
@@ -412,10 +417,17 @@
     <!-- Custom scripts for this page-->
     <!--<script th:src="@{js/sb-admin-datatables.min.js}" src="static/js/sb-admin-datatables.min.js"></script>-->
     <script th:src="@{/vendor/jquery-mask-plugin/src/jquery.mask.js}" src="static/vendor/jquery-mask-plugin/dist/jquery.mask.js"></script>
+    <script th:src="@{/vendor/sweetalert/sweetalert.min.js}" src="static/vendor/sweetalert/sweetalert.min.js"></script>
     <script>
         $(document).ready(function(){
+            // swal("Good job!", "You clicked the button!", "success");
             $('.placeholder').mask("00/00/0000", {placeholder: "__/__/____"});
             $('.money2').mask("##0.00", {reverse: true});
+
+            if($('#idMessage').text()){
+                swal("Information", $('#idMessage').text(), "success");
+            }
+
         });
     </script>
 </div>

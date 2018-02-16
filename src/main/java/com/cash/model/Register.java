@@ -3,6 +3,7 @@ package com.cash.model;
 import lombok.*;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -51,5 +52,8 @@ public class Register {
 
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date lastModifiedDate = Calendar.getInstance().getTime();
+
+    @DBRef
+    private User user;
 
 }

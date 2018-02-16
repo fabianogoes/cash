@@ -5,6 +5,7 @@ cash:
   display-name: @project.name@
   title: @project.description@
   version: @project.version@
+  userLoggedInKey: userLoggedIn
 
 info:
   name: ${cash.display-name}

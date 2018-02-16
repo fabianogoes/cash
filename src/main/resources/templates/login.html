@@ -20,8 +20,8 @@
   <div class="container">
     <div class="card card-login mx-auto mt-5">
       <div class="card-header">
-        <img src="static/img/cash-logo.png" th:src="@{/img/cash-logo.png}" th:width="50px" th:height="40px"/>
-        Login
+          <span th:text="${session.title}"></span> Login
+        <img class="pull-right" src="static/img/cash-logo.png" th:src="@{/img/cash-logo.png}" th:width="30px" th:height="25px"/>
       </div>
       <div class="card-body">
         <form action="#" th:action="@{/login/in}" th:object="${login}" method="post">
@@ -30,7 +30,7 @@
             <div class="col-12">
               <div class="alert alert-danger alert-dismissible" role="alert" th:if="${message != null}">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <strong>Warning!</strong> <small th:text="${message}"></small>
+                <strong>Warning!</strong> <small th:text="${message}" id="idMessage"></small>
               </div>
             </div>
           </div>
@@ -54,7 +54,18 @@
         <div class="text-center">
           <a class="d-block small mt-3" href="register.html">Register an Account</a>
           <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+
+            <div>
+                <hr/>
+                <div class="pull-left">
+                    <img src="static/img/cash-logo.png" th:src="@{/img/cash-logo.png}" th:width="30px" th:height="20px"/>
+                    <small>Copyright © Fabiano Góes 2018</small>
+                </div>
+                <small class="pull-right" th:text="${session.version}"></small>
+            </div>
+
         </div>
+
       </div>
     </div>
   </div>
@@ -69,6 +80,19 @@
   <script th:src="@{/vendor/jquery-mask-plugin/src/jquery.mask.js}" src="static/vendor/jquery-mask-plugin/dist/jquery.mask.js"></script>
   <!-- Core plugin JavaScript-->
   <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}" src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script th:src="@{/vendor/sweetalert/sweetalert.min.js}" src="static/vendor/sweetalert/sweetalert.min.js"></script>
+  <script>
+      $(document).ready(function(){
+          // swal("Good job!", "You clicked the button!", "success");
+          $('.placeholder').mask("00/00/0000", {placeholder: "__/__/____"});
+          $('.money2').mask("##0.00", {reverse: true});
+
+          if($('#idMessage').text()){
+              swal("Attention", $('#idMessage').text(), "error");
+          }
+
+      });
+  </script>
 
 </body>
 

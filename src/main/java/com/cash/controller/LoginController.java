@@ -39,7 +39,7 @@ public class LoginController {
 
     @RequestMapping("/out")
     public String out(HttpSession session){
-        session.setAttribute("userLoggedIn", null);
+        session.invalidate();
         return "redirect:/login";
     }
 

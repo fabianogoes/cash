@@ -5,14 +5,13 @@ import com.cash.service.RegisterService;
 import com.cash.util.RegisterPropertiesUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.text.DateFormatSymbols;
 
@@ -27,7 +26,7 @@ public class RegisterController {
     private RegisterPropertiesUtil registerPropertiesUtil;
 
     @RequestMapping
-    public ModelAndView list(HttpSession session){
+    public ModelAndView list(){
         ModelAndView index = new ModelAndView("index");
         index.addObject("registers", service.findAll());
         return index;
@@ -45,7 +44,7 @@ public class RegisterController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ModelAndView save(@Valid Register register, final BindingResult bindingResult, final Model model){
+    public ModelAndView save(@Valid Register register, final BindingResult bindingResult, RedirectAttributes attributes){
         ModelAndView index = new ModelAndView("index");
         if(bindingResult.hasErrors()){
             index.addObject("categoryRegister", registerPropertiesUtil.getCategoryRegister());
@@ -56,7 +55,7 @@ public class RegisterController {
             return index;
         }
         service.save(register);
-
+        attributes.addFlashAttribute("message", "Register salved successfully");
         index.setViewName("redirect:/register");
         return index;
     }
@@ -67,8 +66,9 @@ public class RegisterController {
         return "redirect:/register";
     }
     @RequestMapping(value = "/paid/{id}", method = RequestMethod.GET)
-    public String paid(@PathVariable String id){
+    public String paid(@PathVariable String id, RedirectAttributes attributes){
         service.paid(id);
+        attributes.addFlashAttribute("message", "Register marked as payment successfully");
         return "redirect:/register";
     }
 
