@@ -2,6 +2,7 @@ package com.cash.controller;
 
 import com.cash.model.Register;
 import com.cash.service.RegisterService;
+import com.cash.util.DateTimeUtil;
 import com.cash.util.RegisterPropertiesUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.text.DateFormatSymbols;
+import java.util.Calendar;
 
 @Controller
 @RequestMapping("/register")
@@ -29,6 +31,7 @@ public class RegisterController {
     public ModelAndView list(){
         ModelAndView index = new ModelAndView("index");
         index.addObject("registers", service.findAll());
+        System.out.println(">>>>>> " + DateTimeUtil.getCurrentMonthName());
         return index;
     }
 
@@ -56,7 +59,7 @@ public class RegisterController {
         }
         service.save(register);
         attributes.addFlashAttribute("message", "Register salved successfully");
-        index.setViewName("redirect:/register");
+        index.setViewName("redirect:/register/form");
         return index;
     }
 

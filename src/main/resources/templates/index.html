@@ -290,6 +290,9 @@
                     <div class="card-header">
                         <div>
                             <i class="fa fa-file"></i> Register
+                            <a href="#" th:href="@{/register}" class="btn btn-success btn-sm pull-right">
+                                <i class="fa fa-list"></i> View List
+                            </a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -317,7 +320,7 @@
                                 </div>
                                 <div class="col-2" th:classappend="${#fields.hasErrors('amount')} ? 'text-danger'">
                                     <label>Amount *</label>
-                                    <input type="text" class="form-control money2" name="amount" th:value="*{amount}" />
+                                    <input type="text" class="form-control money2" id="amount" name="amount" th:value="*{amount}" autofocus="autofocus" />
                                 </div>
                                 <div class="col-2">
                                     <label>Category</label>
@@ -423,10 +426,34 @@
             // swal("Good job!", "You clicked the button!", "success");
             $('.placeholder').mask("00/00/0000", {placeholder: "__/__/____"});
             $('.money2').mask("##0.00", {reverse: true});
-
             if($('#idMessage').text()){
-                swal("Information", $('#idMessage').text(), "success");
+                swal("Information", $('#idMessage').text(), "success")
+                    .then((value) => {
+                        $('#amount').select();
+                });
             }
+            $('#amount').select();
+
+            // function deleteRegister(id){
+            //     swal({
+            //         title: "Are you sure?",
+            //         text: "You will not be able to recover this imaginary file!",
+            //         icon: "warning",
+            //         buttons: true,
+            //         dangerMode: true,
+            //     }).then((willDelete) => {
+            //         if (willDelete) {
+            //             // window.location.href = "/register/delete/";
+            //             swal("Information", "Register deleted successfully", "success")
+            //                 .then((value) => {
+            //                 $('#amount').select();
+            //         });
+            //
+            //         }
+            //     });
+            //
+            // }
+
 
         });
     </script>
