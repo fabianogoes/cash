@@ -34,7 +34,7 @@ public class RegisterService {
     }
 
     public List<Register> findAll() {
-        return repository.findByUser(user);
+        return repository.findByUserAndMonth(user, DateTimeUtil.getCurrentMonthName());
     }
 
     public Register findOne(String id) {
