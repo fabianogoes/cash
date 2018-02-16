@@ -4,6 +4,7 @@ server:
 cash:
   display-name: @project.name@
   title: @project.description@
+  version: @project.version@
 
 info:
   name: ${cash.display-name}
