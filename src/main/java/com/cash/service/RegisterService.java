@@ -3,6 +3,7 @@ package com.cash.service;
 import com.cash.model.Register;
 import com.cash.model.User;
 import com.cash.repository.RegisterRepository;
+import com.cash.util.DateTimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,7 @@ public class RegisterService {
         if(register.getId() == null) {
             register.setCreatedDate(Calendar.getInstance().getTime());
         }
+        register.setMonth(DateTimeUtil.getCurrentMonthName());
         register.setUser(user);
         register.setLastModifiedDate(Calendar.getInstance().getTime());
         return repository.save(register);
