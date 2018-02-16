@@ -1,13 +1,13 @@
 package com.cash.model;
 
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.math.BigDecimal;
+import javax.validation.constraints.Min;
+import java.util.Calendar;
 import java.util.Date;
 
 @Data
@@ -21,15 +21,18 @@ public class Register {
     private String id;
 
     @Indexed
+    @NonNull
+    @NotBlank(message = "Required Field.")
     private String title;
     private String description;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private Date dueDate;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Date dueDate = Calendar.getInstance().getTime();
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date payDate;
 
+    @Min(value = 1, message = "Amount should not be less than 1")
     private double amount;
 
     private String month;
@@ -43,14 +46,10 @@ public class Register {
     // WATER, LIGHT, PHONE, INTERNET, CREDITCARD, FOOD, HEALTH, EDUCATION, BANKRATE, HABITATION
     private String category;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    @CreatedDate
-    private Date createdDate;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Date createdDate = Calendar.getInstance().getTime();
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    @LastModifiedDate
-    private Date lastModifiedDate;
-
-
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Date lastModifiedDate = Calendar.getInstance().getTime();
 
 }

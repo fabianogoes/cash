@@ -5,11 +5,13 @@ import com.cash.model.DashMessage;
 import com.cash.model.Register;
 import com.cash.model.User;
 import com.cash.service.RegisterService;
+import com.cash.util.StringToDateConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
 import java.util.Arrays;
 import java.util.Calendar;
@@ -29,33 +31,33 @@ public class Application implements CommandLineRunner {
 	@Override
 	public void run(String... strings) throws Exception {
 		service.deleteAll();
-		Register register = Register.builder()
-				.status("Paid")
-				.dueDate(Calendar.getInstance().getTime())
-				.title("Conta de Agua")
-				.amount(50.50)
-				.type("Debit")
-				.category("Water")
-				.build();
-		service.save(register);
-		register = Register.builder()
-				.status("Pending")
-				.dueDate(Calendar.getInstance().getTime())
-				.title("Conta de Luz")
-				.amount(61.30)
-				.type("Debit")
-				.category("Light")
-				.build();
-		service.save(register);
-		register = Register.builder()
-				.status("Delayed")
-				.dueDate(Calendar.getInstance().getTime())
-				.title("Conta de Telefone")
-				.amount(43.20)
-				.type("Debit")
-				.category("Phone")
-				.build();
-		service.save(register);
+//		Register register = Register.builder()
+//				.status("Paid")
+//				.dueDate(Calendar.getInstance().getTime())
+//				.title("Conta de Agua")
+//				.amount(50.50)
+//				.type("Debit")
+//				.category("Water")
+//				.build();
+//		service.save(register);
+//		register = Register.builder()
+//				.status("Pending")
+//				.dueDate(Calendar.getInstance().getTime())
+//				.title("Conta de Luz")
+//				.amount(61.30)
+//				.type("Debit")
+//				.category("Light")
+//				.build();
+//		service.save(register);
+//		register = Register.builder()
+//				.status("Delayed")
+//				.dueDate(Calendar.getInstance().getTime())
+//				.title("Conta de Telefone")
+//				.amount(43.20)
+//				.type("Debit")
+//				.category("Phone")
+//				.build();
+//		service.save(register);
 	}
 
 	@Bean

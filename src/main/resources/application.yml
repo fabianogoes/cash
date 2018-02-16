@@ -32,6 +32,7 @@ register:
     - Debit
     - Credit
   categoryRegister:
+    - Salary
     - Water
     - Light
     - Phone
@@ -43,6 +44,6 @@ register:
     - BankRate
     - Habitation
   statusRegister:
-    - Paid
     - Pending
+    - Paid
     - Delayed

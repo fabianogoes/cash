@@ -5,6 +5,7 @@ import com.cash.repository.RegisterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
 import java.util.List;
 
 @Service
@@ -26,6 +27,10 @@ public class RegisterService {
     }
 
     public Register save(Register register) {
+        if(register.getId() == null) {
+            register.setCreatedDate(Calendar.getInstance().getTime());
+        }
+        register.setLastModifiedDate(Calendar.getInstance().getTime());
         return repository.save(register);
     }
 
@@ -35,5 +40,14 @@ public class RegisterService {
 
     public void deleteAll() {
         repository.deleteAll();
+    }
+
+    public void paid(String id) {
+        Register register = repository.findOne(id);
+        String status = register.getStatus();
+        status = (status.equalsIgnoreCase("Pending") || status.equalsIgnoreCase("Delayed")) ?
+                    "Paid" : "Pending";
+        register.setStatus(status);
+        repository.save(register);
     }
 }
