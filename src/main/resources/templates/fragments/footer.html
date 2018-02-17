@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <footer class="sticky-footer" th:fragment="footer">
+        <div class="container">
+            <div class="pull-left">
+
+            </div>
+            <div class="pull-right">
+                <small th:text="${session.title}"></small> | <small th:text="${session.version}"></small> |
+                <small>Copyright © Fabiano Góes 2018</small>
+                <img src="static/img/cash-logo.png" th:src="@{/img/cash-logo.png}" th:width="50px" th:height="40px"/>
+            </div>
+        </div>
+    </footer>
+</html>

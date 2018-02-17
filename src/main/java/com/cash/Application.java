@@ -39,20 +39,12 @@ public class Application implements CommandLineRunner {
 		User userAdministrator = new User().builder()
 				.name("Administrator")
 				.email("admin@gmail.com")
-				.password("123")
+				.password("123456")
 				.build();
-        if(userService.findByEmail(userAdministrator.getEmail()) == null) {
-            userService.save(userAdministrator);
+		User userDB = userService.findByEmail(userAdministrator.getEmail());
+		if(userDB == null) {
+        	userService.save(userAdministrator);
         }
-//		Register register = Register.builder()
-//				.status("Paid")
-//				.dueDate(Calendar.getInstance().getTime())
-//				.title("Conta de Agua")
-//				.amount(50.50)
-//				.type("Debit")
-//				.category("Water")
-//				.build();
-//		service.save(register);
 	}
 
 	@Bean

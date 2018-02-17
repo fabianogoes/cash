@@ -803,7 +803,7 @@ extend( QUnit, {
 
 		if ( qunit ) {
 			qunit.innerHTML =
-				"<h1 id='qunit-header'>" + escapeText( document.title ) + "</h1>" +
+				"<h1 id='qunit-header.html'>" + escapeText( document.title ) + "</h1>" +
 				"<h2 id='qunit-banner'></h2>" +
 				"<div id='qunit-testrunner-toolbar'></div>" +
 				"<h2 id='qunit-userAgent'></h2>" +
@@ -1094,7 +1094,7 @@ QUnit.load = function() {
 	}
 
 	// `banner` initialized at top of scope
-	banner = id( "qunit-header" );
+	banner = id( "qunit-header.html" );
 	if ( banner ) {
 		banner.innerHTML = "<a href='" + QUnit.url({ filter: undefined, module: undefined, testNumber: undefined }) + "'>" + banner.innerHTML + "</a> ";
 	}

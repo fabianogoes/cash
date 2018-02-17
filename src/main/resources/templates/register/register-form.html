@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="register-form">
+
+    <div class="card mb-3" th:if="${register != null}">
+        <div class="card-header">
+            <div>
+                <i class="fa fa-file"></i> Register
+                <a href="#" th:href="@{/register}" class="btn btn-success btn-sm pull-right">
+                    <i class="fa fa-list"></i> View List
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <form action="#" th:action="@{/register/save}" th:object="${register}" method="post">
+
+                <div class="alert alert-danger alert-dismissible" role="alert" th:if="${#fields.hasAnyErrors()}">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div th:each="error : ${#fields.detailedErrors()}">
+                        <strong th:text="${error.fieldName + ': '}"></strong> <span th:text="${error.message}"></span>
+                    </div>
+                </div>
+
+                <div class="row" th:if="${register.id != null}" >
+                    <div class="col-12">
+                        <label>ID</label>
+                        <input type="text" class="form-control" name="id" th:value="*{id}" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <label>Type</label>
+                        <select class="form-control" name="type" th:value="*{type}">
+                            <option th:each="type : ${typeRegister}" th:text="${type}"></option>
+                        </select>
+                    </div>
+                    <div class="col-2" th:classappend="${#fields.hasErrors('amount')} ? 'text-danger'">
+                        <label>Amount *</label>
+                        <input type="text" class="form-control money2" id="amount" name="amount" th:value="*{amount}" autofocus="autofocus" />
+                    </div>
+                    <div class="col-2">
+                        <label>Category</label>
+                        <select class="form-control" name="category" th:value="*{category}">
+                            <option th:each="category : ${categoryRegister}" th:text="${category}"></option>
+                        </select>
+                    </div>
+                    <div class="col-6" th:classappend="${#fields.hasErrors('title')} ? 'text-danger'">
+                        <label>Title *</label>
+                        <input type="text" class="form-control" name="title" th:value="*{title}" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2" th:classappend="${#fields.hasErrors('dueDate')} ? 'text-danger'">
+                        <label>Due Date *</label>
+                        <!--<input type="text" class="form-control" name="dueDate" th:value="*{dueDate}" placeholder="DD/MM/YYYY" th:if="${register.id == null}" />-->
+                        <input type="text" class="form-control placeholder" name="dueDate" th:value="${#dates.format(register.dueDate, 'dd/MM/yyyy')}" maxlength="10" />
+                    </div>
+                    <div class="col-2">
+                        <label>Status</label>
+                        <select class="form-control" name="status" th:value="*{status}">
+                            <option th:each="status : ${statusRegister}" th:text="${status}"></option>
+                        </select>
+                    </div>
+                    <div class="col-8">
+                        <label>Description</label>
+                        <input type="text" class="form-control" name="description" th:value="*{description}" />
+                    </div>
+                </div>
+                <hr/>
+                <div class="row">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-check"></i> Save
+                        </button>
+                        <a href="#" th:href="@{/register}" class="btn btn-warning pull-right">
+                            <i class="fa fa-remove"></i> Cancel
+                        </a>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+</html>

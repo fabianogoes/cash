@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="sidebar">
+
+    <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+            <div class="card text-white bg-info o-hidden h-100">
+                <div class="card-body">
+                    <div class="card-body-icon">
+                        <i class="fa fa-fw fa-user"></i>
+                    </div>
+                    <div class="mr-5">
+                        <i class="fa fa-fw fa-user"></i>
+                        <span th:text="${session.userLoggedIn.name}">User Logged In</span>
+                    </div>
+                </div>
+                <a class="card-footer text-white clearfix small z-1" href="#">
+                    <div class="float-left">
+                        <i class="fa fa-fw fa-envelope"></i>
+                        <span th:text="${session.userLoggedIn.email}">View Details</span>
+                    </div>
+                    <span class="float-right">
+                <i class="fa fa-angle-right"></i>
+              </span>
+                </a>
+            </div>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+            <a class="nav-link" href="index.html" th:href="@{/}">
+                <i class="fa fa-fw fa-dashboard"></i>
+                <span class="nav-link-text">Dashboard</span>
+            </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Register">
+            <a class="nav-link" href="index.html" th:href="@{/register}">
+                <i class="fa fa-fw fa-table"></i>
+                <span class="nav-link-text">Register</span>
+            </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Report">
+            <a class="nav-link" href="index.html" th:href="@{/}">
+                <i class="fa fa-fw fa-area-chart"></i>
+                <span class="nav-link-text">Report</span>
+            </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+                <i class="fa fa-fw fa-address-card"></i>
+                <span class="nav-link-text">Profile</span>
+            </a>
+            <ul class="sidenav-second-level collapse" id="collapseComponents">
+                <li>
+                    <a href="index.html">User</a>
+                </li>
+                <li>
+                    <a href="index.html">Password</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+</div>
+
+</html>

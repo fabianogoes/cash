@@ -2,8 +2,6 @@ package com.cash.interceptor;
 
 import com.cash.model.DashAlert;
 import com.cash.model.DashMessage;
-import com.cash.model.Totalizer;
-import com.cash.service.TotalizerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -30,9 +28,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     @Autowired
     private List<DashAlert> alerts;
 
-    @Autowired
-    private TotalizerService totalizerService;
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
@@ -55,16 +50,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         if(!url.toString().contains("/login") && session.getAttribute("userLoggedIn") == null){
             response.sendRedirect("/login");
         }
-        Totalizer totalizer = totalizerService.getTotalizer();
         session.setAttribute("title", title);
         session.setAttribute("version", version);
-        session.setAttribute("totalCredit", totalizer.getCredit());
-        session.setAttribute("totalDebit", totalizer.getDebit());
-        session.setAttribute("totalBalance", totalizer.getBalance());
-        session.setAttribute("totalPending", totalizer.getPending());
         session.setAttribute("messages", messages);
         session.setAttribute("alerts", alerts);
-
     }
 
     @Override

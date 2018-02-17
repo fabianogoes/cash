@@ -3763,7 +3763,7 @@ if (typeof sinon == "undefined") {
             verifyState(this);
 
             if (unsafeHeaders[header] || /^(Sec-|Proxy-)/.test(header)) {
-                throw new Error("Refused to set unsafe header \"" + header + "\"");
+                throw new Error("Refused to set unsafe header.html \"" + header + "\"");
             }
 
             if (this.requestHeaders[header]) {

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<li class="nav-item dropdown" th:fragment="navbar-alerts">
+    <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-fw fa-bell"></i>
+        <span class="d-lg-none">Alerts
+              <span class="badge badge-pill badge-warning">6 New</span>
+            </span>
+        <span class="indicator text-warning d-none d-lg-block">
+              <i class="fa fa-fw fa-circle"></i>
+            </span>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="alertsDropdown">
+        <h6 class="dropdown-header">New Alerts:</h6>
+
+        <div th:each="alert : ${session.alerts}">
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">
+                            <span class="text-success">
+                                <strong th:text="${alert.title}"><i class="fa fa-long-arrow-up fa-fw"></i>Alert Title</strong>
+                            </span>
+                <div class="dropdown-message small" th:text="alert.description">Alert Description</div>
+            </a>
+        </div>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item small" href="#">View all alerts</a>
+    </div>
+</li>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="footerjs">
+    <script th:src="@{/vendor/jquery/jquery.min.js}" src="static/vendor/jquery/jquery.min.js"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}" src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}" src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script th:src="@{/vendor/datatables/jquery.dataTables.js}" src="static/vendor/datatables/jquery.dataTables.js"></script>
+    <script th:src="@{/vendor/datatables/dataTables.bootstrap4.js}" src="vendor/datatables/dataTables.bootstrap4.js"></script>
+    <script th:src="@{/js/sb-admin.min.js}" src="static/js/sb-admin.min.js"></script>
+    <script th:src="@{/vendor/jquery-mask-plugin/src/jquery.mask.js}" src="static/vendor/jquery-mask-plugin/dist/jquery.mask.js"></script>
+    <script th:src="@{/vendor/sweetalert/sweetalert.min.js}" src="static/vendor/sweetalert/sweetalert.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.placeholder').mask("00/00/0000", {placeholder: "__/__/____"});
+            $('.money2').mask("##0.00", {reverse: true});
+            if($('#idMessage').text()){
+                swal("Information", $('#idMessage').text(), "success")
+                    .then((value) => {
+                    $('#amount').select();
+            });
+            }
+            $('#amount').select();
+        });
+    </script>
+</div>
+
+</html>
