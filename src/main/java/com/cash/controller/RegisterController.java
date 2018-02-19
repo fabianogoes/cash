@@ -38,7 +38,7 @@ public class RegisterController {
     @RequestMapping("/form/{type}")
     public ModelAndView form(@PathVariable String type){
         ModelAndView index = new ModelAndView("index");
-        index.addObject("categoryRegister", registerPropertiesUtil.getCategoryRegister());
+        index.addObject("categoryRegister", service.getCategories());
         index.addObject("typeRegister", registerPropertiesUtil.getTypeRegister());
         index.addObject("statusRegister", registerPropertiesUtil.getStatusRegister());
         index.addObject("months", new DateFormatSymbols().getMonths());
@@ -50,7 +50,7 @@ public class RegisterController {
     public ModelAndView save(@Valid Register register, final BindingResult bindingResult, RedirectAttributes attributes){
         ModelAndView index = new ModelAndView("index");
         if(bindingResult.hasErrors()){
-            index.addObject("categoryRegister", registerPropertiesUtil.getCategoryRegister());
+            index.addObject("categoryRegister", service.getCategories());
             index.addObject("typeRegister", registerPropertiesUtil.getTypeRegister());
             index.addObject("statusRegister", registerPropertiesUtil.getStatusRegister());
             index.addObject("months", new DateFormatSymbols().getMonths());
@@ -78,7 +78,7 @@ public class RegisterController {
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView edit(@PathVariable String id){
         ModelAndView index = new ModelAndView("index");
-        index.addObject("categoryRegister", registerPropertiesUtil.getCategoryRegister());
+        index.addObject("categoryRegister", service.getCategories());
         index.addObject("typeRegister", registerPropertiesUtil.getTypeRegister());
         index.addObject("statusRegister", registerPropertiesUtil.getStatusRegister());
         index.addObject("months", new DateFormatSymbols().getMonths());

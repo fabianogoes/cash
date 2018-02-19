@@ -1,5 +1,6 @@
 package com.cash.service;
 
+import com.cash.model.Category;
 import com.cash.model.Register;
 import com.cash.model.User;
 import com.cash.repository.RegisterRepository;
@@ -26,6 +27,9 @@ public class RegisterService {
 
     @Autowired
     private RegisterRepository repository;
+
+    @Autowired
+    private CategoryService categoryService;
 
     public RegisterService(){
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
@@ -62,5 +66,9 @@ public class RegisterService {
                     "Paid" : "Pending";
         register.setStatus(status);
         repository.save(register);
+    }
+
+    public List<Category> getCategories() {
+        return categoryService.findAll();
     }
 }

@@ -44,9 +44,14 @@
                         <input type="text" class="form-control money2" id="amount" name="amount" th:value="*{amount}" autofocus="autofocus" />
                     </div>
                     <div class="col-2">
-                        <label>Category</label>
+                        <label>
+                            Category
+                            <a href="#" th:href="@{/register/category/form}">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </label>
                         <select class="form-control" name="category" th:value="*{category}">
-                            <option th:each="category : ${categoryRegister}" th:text="${category}"></option>
+                            <option th:each="category : ${categoryRegister}" th:text="${category.name}"></option>
                         </select>
                     </div>
                     <div class="col-6" th:classappend="${#fields.hasErrors('title')} ? 'text-danger'">

@@ -4,7 +4,9 @@ import com.cash.config.WebMvcConfiguration;
 import com.cash.model.DashAlert;
 import com.cash.model.DashMessage;
 import com.cash.model.User;
+import com.cash.service.CategoryService;
 import com.cash.service.UserService;
+import com.cash.util.RegisterPropertiesUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,11 +30,14 @@ public class Application implements CommandLineRunner {
 		).run(args);
 	}
 
-//	@Autowired
-//	private RegisterService service;
-
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private RegisterPropertiesUtil registerPropertiesUtil;
+
+	@Autowired
+	private CategoryService categoryService;
 
 	@Override
 	public void run(String... strings) throws Exception {
@@ -45,6 +50,13 @@ public class Application implements CommandLineRunner {
 		if(userDB == null) {
         	userService.save(userAdministrator);
         }
+
+		registerPropertiesUtil.getCategoryRegister().forEach(categName -> {
+			if(categoryService.findByName(categName) == null) {
+				categoryService.save(categName);
+			}
+		});
+
 	}
 
 	@Bean

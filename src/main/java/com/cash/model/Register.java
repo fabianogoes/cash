@@ -49,7 +49,8 @@ public class Register {
     private String type;
 
     // WATER, LIGHT, PHONE, INTERNET, CREDITCARD, FOOD, HEALTH, EDUCATION, BANKRATE, HABITATION
-    private String category;
+    @DBRef
+    private Category category;
 
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date createdDate = Calendar.getInstance().getTime();
