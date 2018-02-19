@@ -6,7 +6,7 @@
         <div class="card-header">
             <div>
                 <i class="fa fa-file"></i> Register
-                <a href="#" th:href="@{/register}" class="btn btn-success btn-sm pull-right">
+                <a href="#" th:href="@{/register}" class="btn btn-secondary btn-sm pull-right">
                     <i class="fa fa-list"></i> View List
                 </a>
             </div>
@@ -31,8 +31,12 @@
                 <div class="row">
                     <div class="col-2">
                         <label>Type</label>
-                        <select class="form-control" name="type" th:value="*{type}">
-                            <option th:each="type : ${typeRegister}" th:text="${type}"></option>
+                        <select class="form-control" name="type" th:value="*{type}" readonly="readonly" >
+                            <option th:each="type : ${typeRegister}"
+                                    th:text="${type}"
+                                    th:value="${type}"
+                                    th:selected="(${type} == *{type})">
+                            </option>
                         </select>
                     </div>
                     <div class="col-2" th:classappend="${#fields.hasErrors('amount')} ? 'text-danger'">
@@ -53,8 +57,7 @@
                 <div class="row">
                     <div class="col-2" th:classappend="${#fields.hasErrors('dueDate')} ? 'text-danger'">
                         <label>Due Date *</label>
-                        <!--<input type="text" class="form-control" name="dueDate" th:value="*{dueDate}" placeholder="DD/MM/YYYY" th:if="${register.id == null}" />-->
-                        <input type="text" class="form-control placeholder" name="dueDate" th:value="${#dates.format(register.dueDate, 'dd/MM/yyyy')}" maxlength="10" />
+                        <input type="text" id="calendar" class="form-control" name="dueDate" th:value="${#dates.format(register.dueDate, 'dd/MM/yyyy')}" maxlength="10" />
                     </div>
                     <div class="col-2">
                         <label>Status</label>
@@ -70,10 +73,10 @@
                 <hr/>
                 <div class="row">
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-info">
                             <i class="fa fa-check"></i> Save
                         </button>
-                        <a href="#" th:href="@{/register}" class="btn btn-warning pull-right">
+                        <a href="#" th:href="@{/register}" class="btn btn-secondary pull-right">
                             <i class="fa fa-remove"></i> Cancel
                         </a>
                     </div>

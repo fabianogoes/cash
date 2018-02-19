@@ -13,5 +13,6 @@ public class Totalizer {
     private double debit;
     private double pending;
     private double balance;
+    private double movimentation;
 
 }

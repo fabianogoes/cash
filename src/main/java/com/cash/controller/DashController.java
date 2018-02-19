@@ -31,10 +31,11 @@ public class DashController {
 
         List<Register> registers = registerService.findAll();
         Totalizer totalizer = totalizerService.getTotalizer(registers);
-        mv.addObject("totalCredit", totalizer.getCredit());
-        mv.addObject("totalDebit", totalizer.getDebit());
-        mv.addObject("totalBalance", totalizer.getBalance());
-        mv.addObject("totalPending", totalizer.getPending());
+        mv.addObject("amountCredit", totalizer.getCredit());
+        mv.addObject("amountDebit", totalizer.getDebit());
+        mv.addObject("amountBalance", totalizer.getBalance());
+        mv.addObject("amountPending", totalizer.getPending());
+        mv.addObject("amountMovimentation", totalizer.getMovimentation());
 
         return mv;
     }

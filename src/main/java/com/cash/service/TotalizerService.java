@@ -10,6 +10,7 @@ import java.util.List;
 public class TotalizerService {
 
     public Totalizer getTotalizer(List<Register> registers) {
+        double movimentation = registers.stream().mapToDouble(r -> r.getAmount()).sum();
         double credit = registers.stream().filter(r -> r.getType().equalsIgnoreCase("Credit")).mapToDouble(r -> r.getAmount()).sum();
         double debit = registers.stream().filter(r -> r.getType().equalsIgnoreCase("Debit")).mapToDouble(r -> r.getAmount()).sum();
         double pending = registers.stream().filter(r -> r.getStatus().equalsIgnoreCase("Pending")).mapToDouble(r -> r.getAmount()).sum();
@@ -20,6 +21,7 @@ public class TotalizerService {
                 .debit(debit)
                 .pending(pending)
                 .balance(balance)
+                .movimentation(movimentation)
                 .build();
     }
 

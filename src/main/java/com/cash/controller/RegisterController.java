@@ -35,14 +35,14 @@ public class RegisterController {
         return index;
     }
 
-    @RequestMapping("/form")
-    public ModelAndView form(){
+    @RequestMapping("/form/{type}")
+    public ModelAndView form(@PathVariable String type){
         ModelAndView index = new ModelAndView("index");
         index.addObject("categoryRegister", registerPropertiesUtil.getCategoryRegister());
         index.addObject("typeRegister", registerPropertiesUtil.getTypeRegister());
         index.addObject("statusRegister", registerPropertiesUtil.getStatusRegister());
         index.addObject("months", new DateFormatSymbols().getMonths());
-        index.addObject("register", new Register());
+        index.addObject("register", new Register(type));
         return index;
     }
 
@@ -59,7 +59,7 @@ public class RegisterController {
         }
         service.save(register);
         attributes.addFlashAttribute("message", "Register salved successfully");
-        index.setViewName("redirect:/register/form");
+        index.setViewName("redirect:/register/form/"+register.getType());
         return index;
     }
 

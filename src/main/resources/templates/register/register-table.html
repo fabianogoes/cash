@@ -2,6 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="register-table">
     <div class="table-responsive" th:if="${registers != null}">
+        <div class="row">
+            <div class="col-6">
+                <a href="" class="btn btn-info btn-block" th:href="@{/register/form/Credit}">
+                    <i class="fa fa-fw fa-plus"></i><br/>
+                    New Register to Receive
+                </a>
+            </div>
+            <div class="col-6">
+                <a href="" class="btn btn-danger btn-block" th:href="@{/register/form/Debit}">
+                    <i class="fa fa-fw fa-plus"></i><br/>
+                    New Register to Pay
+                </a>
+            </div>
+        </div>
+        <br/>
         <table class="table table-hover table-condensed">
             <thead>
             <tr>
@@ -12,10 +27,7 @@
                 <th class="text-center">Type</th>
                 <th class="text-center">Category</th>
                 <th class="text-center">
-                    <a href="" class="btn btn-info btn-sm" th:href="@{/register/form}">
-                        <i class="fa fa-fw fa-plus"></i><br/>
-                        Credit
-                    </a>
+                    <i class="fa fa-fw fa-tasks"></i><br/>
                 </th>
             </tr>
             </thead>

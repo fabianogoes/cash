@@ -19,6 +19,10 @@ import java.util.Date;
 @Document
 public class Register {
 
+    public Register(String type) {
+        this.type = type;
+    }
+
     private String id;
 
     @Indexed

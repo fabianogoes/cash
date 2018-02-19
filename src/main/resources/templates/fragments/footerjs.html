@@ -9,10 +9,16 @@
     <script th:src="@{/vendor/datatables/dataTables.bootstrap4.js}" src="vendor/datatables/dataTables.bootstrap4.js"></script>
     <script th:src="@{/js/sb-admin.min.js}" src="static/js/sb-admin.min.js"></script>
     <script th:src="@{/vendor/jquery-mask-plugin/src/jquery.mask.js}" src="static/vendor/jquery-mask-plugin/dist/jquery.mask.js"></script>
+    <script th:src="@{/vendor/jquery-ui/jquery-ui.js}" src="static/vendor/jquery-ui/jquery-ui.js"></script>
     <script th:src="@{/vendor/sweetalert/sweetalert.min.js}" src="static/vendor/sweetalert/sweetalert.min.js"></script>
     <script>
+        $(function() {
+            $( "#calendar" ).datepicker();
+        });
+    </script>
+    <script>
         $(document).ready(function(){
-            $('.placeholder').mask("00/00/0000", {placeholder: "__/__/____"});
+            // $('.placeholder').mask("00/00/0000", {placeholder: "__/__/____"});
             $('.money2').mask("##0.00", {reverse: true});
             if($('#idMessage').text()){
                 swal("Information", $('#idMessage').text(), "success")
