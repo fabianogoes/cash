@@ -53,7 +53,7 @@ public class Application implements CommandLineRunner {
 
 		registerPropertiesUtil.getCategoryRegister().forEach(categName -> {
 			if(categoryService.findByName(categName) == null) {
-				categoryService.save(categName);
+				categoryService.saveByName(categName);
 			}
 		});
 

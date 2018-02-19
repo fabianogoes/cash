@@ -1,5 +1,6 @@
 package com.cash.controller;
 
+import com.cash.model.Category;
 import com.cash.model.Register;
 import com.cash.service.RegisterService;
 import com.cash.util.DateTimeUtil;
@@ -43,6 +44,7 @@ public class RegisterController {
         index.addObject("statusRegister", registerPropertiesUtil.getStatusRegister());
         index.addObject("months", new DateFormatSymbols().getMonths());
         index.addObject("register", new Register(type));
+        index.addObject("category", new Category());
         return index;
     }
 
@@ -57,6 +59,11 @@ public class RegisterController {
             index.addObject("register", register);
             return index;
         }
+
+        System.out.println("****************************************************");
+        System.out.println(register);
+        System.out.println("****************************************************");
+
         service.save(register);
         attributes.addFlashAttribute("message", "Register salved successfully");
         index.setViewName("redirect:/register/form/"+register.getType());
@@ -83,6 +90,16 @@ public class RegisterController {
         index.addObject("statusRegister", registerPropertiesUtil.getStatusRegister());
         index.addObject("months", new DateFormatSymbols().getMonths());
         index.addObject("register", service.findOne(id));
+        index.addObject("category", new Category());
+        return index;
+    }
+
+    @RequestMapping(value = "/category/save", method = RequestMethod.POST)
+    public ModelAndView categorySave(Category category, RedirectAttributes attributes){
+        ModelAndView index = new ModelAndView("index");
+        service.saveCategory(category);
+        attributes.addFlashAttribute("message", "Category salved successfully");
+        index.setViewName("redirect:/register/form/Credit");
         return index;
     }
 

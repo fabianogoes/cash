@@ -16,12 +16,16 @@ public class CategoryService {
         return repository.findByName(name);
     }
 
-    public Category save(String name) {
+    public Category saveByName(String name) {
         Category category = new Category(name);
         return repository.save(category);
     }
 
     public List<Category> findAll() {
         return repository.findAll();
+    }
+
+    public Category save(Category category) {
+        return repository.save(category);
     }
 }

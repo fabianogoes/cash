@@ -71,4 +71,8 @@ public class RegisterService {
     public List<Category> getCategories() {
         return categoryService.findAll();
     }
+
+    public Category saveCategory(Category category) {
+        return categoryService.save(category);
+    }
 }

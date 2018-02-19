@@ -44,14 +44,15 @@
                         <input type="text" class="form-control money2" id="amount" name="amount" th:value="*{amount}" autofocus="autofocus" />
                     </div>
                     <div class="col-2">
+                        <div th:replace="register/category-modal :: category-modal"> </div>
                         <label>
                             Category
-                            <a href="#" th:href="@{/register/category/form}">
+                            <a data-toggle="modal" data-target="#categoryModal" href="#">
                                 <i class="fa fa-plus"></i>
                             </a>
                         </label>
-                        <select class="form-control" name="category" th:value="*{category}">
-                            <option th:each="category : ${categoryRegister}" th:text="${category.name}"></option>
+                        <select class="form-control" name="category" th:field="*{category}">
+                            <option th:each="category : ${categoryRegister}" th:value="${category.id}" th:text="${category.name}"></option>
                         </select>
                     </div>
                     <div class="col-6" th:classappend="${#fields.hasErrors('title')} ? 'text-danger'">
