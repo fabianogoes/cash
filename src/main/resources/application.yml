@@ -1,6 +1,10 @@
 server:
   port: 9090
 
+spring:
+  profiles:
+    active: dev
+
 cash:
   display-name: @project.name@
   title: @project.description@

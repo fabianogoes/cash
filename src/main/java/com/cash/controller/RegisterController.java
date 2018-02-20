@@ -44,7 +44,6 @@ public class RegisterController {
         index.addObject("statusRegister", registerPropertiesUtil.getStatusRegister());
         index.addObject("months", new DateFormatSymbols().getMonths());
         index.addObject("register", new Register(type));
-        index.addObject("category", new Category());
         return index;
     }
 
@@ -90,17 +89,8 @@ public class RegisterController {
         index.addObject("statusRegister", registerPropertiesUtil.getStatusRegister());
         index.addObject("months", new DateFormatSymbols().getMonths());
         index.addObject("register", service.findOne(id));
-        index.addObject("category", new Category());
         return index;
     }
 
-    @RequestMapping(value = "/category/save", method = RequestMethod.POST)
-    public ModelAndView categorySave(Category category, RedirectAttributes attributes){
-        ModelAndView index = new ModelAndView("index");
-        service.saveCategory(category);
-        attributes.addFlashAttribute("message", "Category salved successfully");
-        index.setViewName("redirect:/register/form/Credit");
-        return index;
-    }
 
 }

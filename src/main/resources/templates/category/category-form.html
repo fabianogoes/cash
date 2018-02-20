@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="category-form">
+
+    <div class="card mb-3" th:if="${category != null}">
+        <div class="card-header">
+            <div>
+                <i class="fa fa-file"></i> Category
+                <a href="#" th:href="@{/category}" class="btn btn-secondary btn-sm pull-right">
+                    <i class="fa fa-list"></i> View List
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+            <form action="#" th:action="@{'/category/save' + '?next_url=' + ${next_url} }" th:object="${category}" method="post">
+
+                <div class="row">
+                    <div class="col-2">
+                        <label>ID</label>
+                        <input type="text" class="form-control" name="id" th:value="*{id}" readonly="readonly" />
+                    </div>
+                    <div class="col-10">
+                        <label>Name</label>
+                        <input type="text" class="form-control" name="name" th:value="*{name}" autofocus="autofocus" />
+                    </div>
+                </div>
+                <hr/>
+                <div class="row">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-info">
+                            <i class="fa fa-check"></i> Save
+                        </button>
+                        <a href="#" th:href="@{/category}" class="btn btn-secondary pull-right">
+                            <i class="fa fa-remove"></i> Cancel
+                        </a>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+</html>

@@ -2,8 +2,10 @@ package com.cash.interceptor;
 
 import com.cash.model.DashAlert;
 import com.cash.model.DashMessage;
+import com.cash.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -11,7 +13,9 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
 import java.util.List;
+
 
 @Component
 public class LoginInterceptor extends HandlerInterceptorAdapter {
@@ -27,6 +31,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
     @Autowired
     private List<DashAlert> alerts;
+
+    @Autowired
+    private Environment environment;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -47,9 +54,16 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         System.out.println("Request URL: " + url);
 
         HttpSession session = request.getSession();
-        if(!url.toString().contains("/login") && session.getAttribute("userLoggedIn") == null){
+
+        if(Arrays.asList(environment.getActiveProfiles()).contains("dev")) {
+            session.setAttribute("userLoggedIn", new User().builder().name("Administrator").email("admin@gmail.com").build());
+        }
+
+        // TODO: tentar implementar de forma mais elegante, para não redirecionar se estiver em profile "dev"
+        if(!url.toString().contains("/login") && session.getAttribute("userLoggedIn") == null) {
             response.sendRedirect("/login");
         }
+
         session.setAttribute("title", title);
         session.setAttribute("version", version);
         session.setAttribute("messages", messages);

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="category-table">
+
+    <div class="page-header">
+        <h1>Category</h1>
+    </div>
+
+    <div class="table-responsive" th:if="${categories != null}">
+
+        <table class="table table-hover table-condensed">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th class="text-center">
+                    <a href="#" th:href="@{/category/form}" class="btn btn-info btn-sm">
+                        <i class="fa fa-fw fa-plus"></i><br/>
+                    </a>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="category : ${categories}">
+                <td th:text="${category.id}"></td>
+                <td th:text="${category.name}"></td>
+                <td class="text-center">
+                    <a href="#" th:href="@{/category/edit/{id}(id=${category.id})}" class="text-success">
+                        <i class="fa fa-fw fa-edit"></i>
+                    </a>
+                    <a href="#" th:href="@{/category/delete/{id}(id=${category.id})}" class="" >
+                        <i class="fa fa-fw fa-trash text-danger"></i>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</html>

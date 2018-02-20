@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <!-- ######################################## HEADERCSS ############################################## -->
@@ -15,13 +15,12 @@
 
         <!-- ######################################## CONTENT ############################################## -->
         <div class="container-fluid">
-
             <div th:replace="fragments/dash :: dash"> </div>
 
             <div th:replace="fragments/alert-message :: alert-message"> </div>
 
             <div th:replace="register/register :: register"> </div>
-
+            <div th:replace="category/category :: category"> </div>
         </div>
         <!-- /######################################## CONTENT ############################################## -->
 
