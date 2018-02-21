@@ -3,6 +3,7 @@ package com.cash.model;
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@EqualsAndHashCode(of = "name")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

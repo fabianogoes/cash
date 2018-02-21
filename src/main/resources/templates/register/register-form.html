@@ -38,10 +38,6 @@
                             </option>
                         </select>
                     </div>
-                    <div class="col-2" th:classappend="${#fields.hasErrors('amount')} ? 'text-danger'">
-                        <label>Amount *</label>
-                        <input type="text" class="form-control money2" id="amount" name="amount" th:value="*{amount}" autofocus="autofocus" />
-                    </div>
                     <div class="col-2">
                         <label>
                             Category
@@ -49,9 +45,16 @@
                                 <i class="fa fa-plus"></i>
                             </a>
                         </label>
-                        <select class="form-control" name="category" th:field="*{category}">
-                            <option th:each="category : ${categoryRegister}" th:value="${category.id}" th:text="${category.name}"></option>
+                        <select class="form-control" name="category" th:value="*{category}">
+                            <option th:each="cat : ${categoryRegister}"
+                                    th:value="${cat.id}"
+                                    th:text="${cat.name}"
+                                    th:selected="(${cat.name} == ${categoryName})"></option>
                         </select>
+                    </div>
+                    <div class="col-2" th:classappend="${#fields.hasErrors('amount')} ? 'text-danger'">
+                        <label>Amount *</label>
+                        <input type="text" class="form-control money2" id="amount" name="amount" th:value="*{amount}" autofocus="autofocus" />
                     </div>
                     <div class="col-6" th:classappend="${#fields.hasErrors('title')} ? 'text-danger'">
                         <label>Title *</label>

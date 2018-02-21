@@ -23,12 +23,14 @@ public class CategoryController {
     public ModelAndView list(){
         ModelAndView index = new ModelAndView("index");
         index.addObject("categories", service.findAll());
+        index.addObject("module", "category");
         return index;
     }
 
     @RequestMapping("/form")
     public ModelAndView form(@RequestParam(value = "next_url", required = false) String next_url){
         ModelAndView index = new ModelAndView("index");
+        index.addObject("module", "category");
         index.addObject("category", new Category());
         index.addObject("next_url", next_url);
         return index;
@@ -40,8 +42,8 @@ public class CategoryController {
         service.save(category);
         attributes.addFlashAttribute("message", "Category salved successfully");
 
-        if(!StringUtils.isEmpty(next_url)){
-            index.setViewName("redirect:" + next_url);
+        if(!"null".equalsIgnoreCase(next_url) && StringUtils.isNotEmpty(next_url) && StringUtils.isNotBlank(next_url)){
+            index.setViewName("redirect:" + next_url + "?categoryName="+category.getName());
             return index;
         }
 
@@ -50,14 +52,16 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String delete(@PathVariable String id){
+    public String delete(@PathVariable String id, RedirectAttributes attributes){
         service.delete(id);
+        attributes.addFlashAttribute("message", "Category deleted successfully");
         return "redirect:/category";
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView edit(@PathVariable String id){
         ModelAndView index = new ModelAndView("index");
+        index.addObject("module", "category");
         index.addObject("category", service.findOne(id));
         return index;
     }

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<div th:fragment="category" th:if="category != null">
+<div th:fragment="category" th:if="${module eq 'category'}">
 
     <!-- Table -->
     <div th:replace="category/category-table :: category-table"> </div>

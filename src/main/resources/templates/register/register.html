@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<div th:fragment="register">
+<div th:fragment="register" th:if="${module eq 'register'}">
 
     <!-- Table -->
     <div th:replace="register/register-table :: register-table"> </div>
@@ -9,6 +9,7 @@
     <!-- Form -->
     <div th:replace="register/register-form :: register-form"> </div>
     <!-- /Form -->
+
 
 </div>
 </html>
