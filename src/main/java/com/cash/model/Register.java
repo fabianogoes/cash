@@ -40,7 +40,7 @@ public class Register {
     @Min(value = 1, message = "Amount should not be less than 1")
     private double amount;
 
-    private String month;
+    private String period;
 
     // PAID, PENDING, DELAYED
     private String status;
@@ -57,6 +57,9 @@ public class Register {
 
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date lastModifiedDate = Calendar.getInstance().getTime();
+
+    // Fixed / Variable
+    private String fixed;
 
     @DBRef
     private User user;

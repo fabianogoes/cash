@@ -74,7 +74,6 @@
 			<version>5.0.1.RELEASE</version>
 		</dependency>
 
-
 		<dependency>
 			<groupId>de.flapdoodle.embed</groupId>
 			<artifactId>de.flapdoodle.embed.mongo</artifactId>

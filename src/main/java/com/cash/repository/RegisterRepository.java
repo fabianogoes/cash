@@ -12,5 +12,5 @@ public interface RegisterRepository extends MongoRepository<Register, String> {
 
     List<Register> findByUser(User user);
 
-    List<Register> findByUserAndMonth(User user, String month);
+    List<Register> findByUserAndPeriod(User user, String period);
 }

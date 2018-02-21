@@ -4,7 +4,7 @@ import com.cash.model.Category;
 import com.cash.model.Register;
 import com.cash.model.User;
 import com.cash.repository.RegisterRepository;
-import com.cash.util.DateTimeUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -38,7 +38,8 @@ public class RegisterService {
     }
 
     public List<Register> findAll() {
-        return repository.findByUserAndMonth(user, DateTimeUtil.getCurrentMonthName());
+        String currentPeriod = this.getCurrentPeriod();
+        return repository.findByUserAndPeriod(user, currentPeriod);
     }
 
     public Register findOne(String id) {
@@ -49,10 +50,41 @@ public class RegisterService {
         if(register.getId() == null) {
             register.setCreatedDate(Calendar.getInstance().getTime());
         }
-        register.setMonth(DateTimeUtil.getCurrentMonthName());
+
+        register.setPeriod(this.getCurrentPeriod());
         register.setUser(user);
         register.setLastModifiedDate(Calendar.getInstance().getTime());
-        return repository.save(register);
+        repository.save(register);
+
+        if("Fixed".equalsIgnoreCase(register.getFixed())){
+            this.saveNextMonths(register);
+        }
+
+        return register;
+    }
+
+    private void saveNextMonths(Register register){
+        int nextMonth = Calendar.getInstance().get(Calendar.MONTH)+1;
+        for(int i = nextMonth; i <= 11; i++){
+            register.setPeriod(this.getPeriod(i));
+            register.setId(null);
+            repository.save(register);
+        }
+
+    }
+
+    private String getCurrentPeriod(){
+        Calendar calendar = Calendar.getInstance();
+        int month = calendar.get(Calendar.MONTH);
+        return getPeriod(month);
+    }
+
+    private String getPeriod(int month){
+        Calendar calendar = Calendar.getInstance();
+        String year = String.valueOf(calendar.get(Calendar.YEAR));
+        String monthStr = StringUtils.leftPad(String.valueOf(month+1), 2, "0");
+        String period = year.concat(monthStr);
+        return period;
     }
 
     public void delete(String id){

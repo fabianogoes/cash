@@ -56,7 +56,16 @@
                         <label>Amount *</label>
                         <input type="text" class="form-control money2" id="amount" name="amount" th:value="*{amount}" autofocus="autofocus" />
                     </div>
-                    <div class="col-6" th:classappend="${#fields.hasErrors('title')} ? 'text-danger'">
+                    <div class="col-2">
+                        <label>
+                            Fixed
+                        </label>
+                        <select class="form-control" name="fixed">
+                            <option value="Fixed" th:value="Fixed" th:selected="(${register.fixed == 'Fixed'})">Fixed</option>
+                            <option value="Variable" th:value="Variable" th:selected="(${register.fixed == 'Variable'})">Variable</option>
+                        </select>
+                    </div>
+                    <div class="col-4" th:classappend="${#fields.hasErrors('title')} ? 'text-danger'">
                         <label>Title *</label>
                         <input type="text" class="form-control" name="title" th:value="*{title}" />
                     </div>
