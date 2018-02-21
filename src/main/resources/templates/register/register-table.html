@@ -22,6 +22,7 @@
             <tr>
                 <th class="text-center">Status</th>
                 <th>Due Date</th>
+                <th>Period</th>
                 <th>Title</th>
                 <th class="text-center">Amount</th>
                 <th class="text-center">Type</th>
@@ -39,6 +40,7 @@
                     <a href="" th:href="@{/register/paid/{id}(id=${register.id})}"><i class="fa fa-fw fa-exclamation-triangle text-danger" th:if="${register.status eq 'Delayed'}"></i></a>
                 </td>
                 <td th:text="${#dates.format(register.dueDate, 'dd/MM/yyyy')}"></td>
+                <td th:text="${register.period}"></td>
                 <td th:text="${register.title}"></td>
                 <td class="text-center" th:text="${'R$ ' + #numbers.formatDecimal(register.amount,2,2)}" th:classappend="${register.type == 'Credit'} ? 'text-success' : 'text-danger'"></td>
                 <td class="text-center" th:text="${register.type}" th:classappend="${register.type == 'Credit'} ? 'text-success' : 'text-danger'"></td>

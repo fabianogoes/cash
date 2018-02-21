@@ -37,6 +37,15 @@ public class RegisterController {
         return index;
     }
 
+    @RequestMapping("/{period}")
+    public ModelAndView listByPeriod(@PathVariable("period") String period){
+        ModelAndView index = new ModelAndView("index");
+        index.addObject("registers", service.findAllByPeriod(period));
+        index.addObject("module", "register");
+        index.addObject("period", period);
+        return index;
+    }
+
     @RequestMapping("/form/{type}")
     public ModelAndView form(@PathVariable String type, @RequestParam(value = "categoryName", required = false) String categoryName){
         ModelAndView index = new ModelAndView("index");

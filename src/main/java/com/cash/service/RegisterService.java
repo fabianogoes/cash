@@ -15,6 +15,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpSession;
 import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @SessionScope
@@ -40,6 +41,10 @@ public class RegisterService {
     public List<Register> findAll() {
         String currentPeriod = this.getCurrentPeriod();
         return repository.findByUserAndPeriod(user, currentPeriod);
+    }
+
+    public List<Register> findAllByPeriod(String period) {
+        return repository.findByUserAndPeriod(user, period);
     }
 
     public Register findOne(String id) {
@@ -107,4 +112,10 @@ public class RegisterService {
     public Category saveCategory(Category category) {
         return categoryService.save(category);
     }
+
+    public List<String> getAllPeriods(){
+        return repository.findAll().stream().map(p -> p.getPeriod()).collect(Collectors.toList());
+    }
+
+
 }

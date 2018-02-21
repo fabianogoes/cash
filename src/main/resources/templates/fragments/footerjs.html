@@ -27,6 +27,10 @@
             });
             }
             $('#amount').select();
+
+            $('#selectPeriod').on('change', function() {
+                window.location.href = "/register/" + this.value;
+            });
         });
     </script>
 </div>

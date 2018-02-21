@@ -3,6 +3,7 @@ package com.cash.interceptor;
 import com.cash.model.DashAlert;
 import com.cash.model.DashMessage;
 import com.cash.model.User;
+import com.cash.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -34,6 +35,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
     @Autowired
     private Environment environment;
+
+    @Autowired
+    private RegisterService registerService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -68,6 +72,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         session.setAttribute("version", version);
         session.setAttribute("messages", messages);
         session.setAttribute("alerts", alerts);
+        session.setAttribute("periods", registerService.getAllPeriods());
     }
 
     @Override
