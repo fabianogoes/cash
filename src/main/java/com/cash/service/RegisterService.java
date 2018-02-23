@@ -99,8 +99,8 @@ public class RegisterService {
     public void paid(String id) {
         Register register = repository.findOne(id);
         String status = register.getStatus();
-        status = (status.equalsIgnoreCase("Pending") || status.equalsIgnoreCase("Delayed")) ?
-                    "Paid" : "Pending";
+        status = (status.equalsIgnoreCase(Register.STATUS_PENDING) || status.equalsIgnoreCase(Register.STATUS_DELAYED)) ?
+                    Register.STATUS_PAID : Register.STATUS_PENDING;
         register.setStatus(status);
         repository.save(register);
     }

@@ -16,12 +16,17 @@
         <!-- ######################################## CONTENT ############################################## -->
         <div class="container-fluid">
             <div class="row">
-                <div class="col-2">
-                    <select class="form-control" id="selectPeriod">
-                        <option th:each="p : ${session.periods}"
-                                th:text="${p}"
-                                th:selected="(${p} == ${period})"></option>
-                    </select>
+                <div class="col-3">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label for="selectPeriod">Period:&nbsp;</label>
+                            <select class="form-control" id="selectPeriod">
+                                <option th:each="p : ${session.periods}"
+                                        th:text="${p}"
+                                        th:selected="(${p} == ${period})"></option>
+                            </select>
+                        </div>
+                    </form>
                 </div>
                 <div class="col-10"></div>
             </div>

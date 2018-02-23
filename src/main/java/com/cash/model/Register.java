@@ -8,6 +8,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Min;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -18,6 +21,10 @@ import java.util.Date;
 @Builder
 @Document
 public class Register {
+
+    public static final String STATUS_PAID = "Paid";
+    public static final String STATUS_PENDING = "Pending";
+    public static final String STATUS_DELAYED = "Delayed";
 
     public Register(String type) {
         this.type = type;
@@ -63,5 +70,21 @@ public class Register {
 
     @DBRef
     private User user;
+
+    // PAID, PENDING, DELAYED
+    public String getStatus() {
+        if(STATUS_PENDING.equalsIgnoreCase(this.status)) {
+            ZoneId defaultZoneId = ZoneId.systemDefault();
+            Instant instant = this.dueDate.toInstant();
+            LocalDate localDueDate = instant.atZone(defaultZoneId).toLocalDate();
+
+            LocalDate nowDate = LocalDate.now(defaultZoneId);
+            if(nowDate.isAfter(localDueDate)){
+                return STATUS_DELAYED;
+            }
+        }
+
+        return this.status;
+    }
 
 }
