@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.text.DateFormatSymbols;
+import java.util.List;
 
 @Controller
 @RequestMapping("/register")
@@ -32,7 +33,10 @@ public class RegisterController {
     @RequestMapping
     public ModelAndView list(){
         ModelAndView index = new ModelAndView("index");
-        index.addObject("registers", service.findAll());
+        List<Register> registers = service.findAll();
+        double totals = registers.stream().mapToDouble(r -> r.getAmount()).sum();
+        index.addObject("registers", registers);
+        index.addObject("amountAll", totals);
         index.addObject("module", "register");
         return index;
     }
@@ -40,7 +44,20 @@ public class RegisterController {
     @RequestMapping("/credit")
     public ModelAndView credit(){
         ModelAndView index = new ModelAndView("index");
-        index.addObject("registers", service.findAllCredit());
+        List<Register> registers = service.findAllCredit();
+        double totals = registers.stream().mapToDouble(r -> r.getAmount()).sum();
+        index.addObject("registers", registers);
+        index.addObject("amountCredit", totals);
+        index.addObject("module", "register");
+        return index;
+    }
+    @RequestMapping("/debit")
+    public ModelAndView debit(){
+        ModelAndView index = new ModelAndView("index");
+        List<Register> registers = service.findAllDebit();
+        double totals = registers.stream().mapToDouble(r -> r.getAmount()).sum();
+        index.addObject("registers", registers);
+        index.addObject("amountDebit", totals);
         index.addObject("module", "register");
         return index;
     }

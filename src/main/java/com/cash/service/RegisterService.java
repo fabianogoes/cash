@@ -111,16 +111,15 @@ public class RegisterService {
         return categoryService.findAll();
     }
 
-    public Category saveCategory(Category category) {
-        return categoryService.save(category);
-    }
-
     public List<String> getAllPeriods(){
         return repository.findAll().stream().map(p -> p.getPeriod()).collect(Collectors.toList());
     }
 
-
     public List<Register> findAllCredit() {
         return repository.findByTypeAndPeriod(Register.TYPE_CREDIT, this.getCurrentPeriod());
+    }
+
+    public List<Register> findAllDebit() {
+        return repository.findByTypeAndPeriod(Register.TYPE_DEBIT, this.getCurrentPeriod());
     }
 }
