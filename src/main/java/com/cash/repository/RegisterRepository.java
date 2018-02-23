@@ -8,9 +8,7 @@ import java.util.List;
 
 public interface RegisterRepository extends MongoRepository<Register, String> {
 
-    Register findByTitle(String title);
-
-    List<Register> findByUser(User user);
-
     List<Register> findByUserAndPeriod(User user, String period);
+
+    List<Register> findByTypeAndPeriod(String typeCredit, String period);
 }

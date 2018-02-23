@@ -37,6 +37,14 @@ public class RegisterController {
         return index;
     }
 
+    @RequestMapping("/credit")
+    public ModelAndView credit(){
+        ModelAndView index = new ModelAndView("index");
+        index.addObject("registers", service.findAllCredit());
+        index.addObject("module", "register");
+        return index;
+    }
+
     @RequestMapping("/{period}")
     public ModelAndView listByPeriod(@PathVariable("period") String period){
         ModelAndView index = new ModelAndView("index");

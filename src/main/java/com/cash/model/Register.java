@@ -25,6 +25,10 @@ public class Register {
     public static final String STATUS_PAID = "Paid";
     public static final String STATUS_PENDING = "Pending";
     public static final String STATUS_DELAYED = "Delayed";
+    public static final String TYPE_DEBIT = "Debit";
+    public static final String TYPE_CREDIT = "Credit";
+    public static final String FIXED = "Fixed";
+    public static final String VARIABLE = "Variable";
 
     public Register(String type) {
         this.type = type;

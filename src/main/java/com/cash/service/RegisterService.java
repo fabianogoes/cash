@@ -52,16 +52,18 @@ public class RegisterService {
     }
 
     public Register save(Register register) {
-        if(register.getId() == null) {
-            register.setCreatedDate(Calendar.getInstance().getTime());
-        }
+        boolean newRegister = register.getId() == null;
+        boolean fixed = Register.FIXED.equalsIgnoreCase(register.getFixed());
 
-        register.setPeriod(this.getCurrentPeriod());
-        register.setUser(user);
+        if(newRegister) {
+            register.setCreatedDate(Calendar.getInstance().getTime());
+            register.setPeriod(this.getCurrentPeriod());
+            register.setUser(user);
+        }
         register.setLastModifiedDate(Calendar.getInstance().getTime());
         repository.save(register);
 
-        if("Fixed".equalsIgnoreCase(register.getFixed())){
+        if(newRegister && fixed){
             this.saveNextMonths(register);
         }
 
@@ -118,4 +120,7 @@ public class RegisterService {
     }
 
 
+    public List<Register> findAllCredit() {
+        return repository.findByTypeAndPeriod(Register.TYPE_CREDIT, this.getCurrentPeriod());
+    }
 }
